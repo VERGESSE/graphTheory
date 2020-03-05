@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
+//广度优先遍历
 public class GraphBFS {
 
     private Graph G;
