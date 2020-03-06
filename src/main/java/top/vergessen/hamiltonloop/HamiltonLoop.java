@@ -8,13 +8,15 @@ import java.util.Collections;
 public class HamiltonLoop {
 
     private Graph G;
-    private boolean[] visited;
+//    private boolean[] visited;
+    private int visited;       // 状态压缩
     private int[] pre;
     private int end;
 
     public HamiltonLoop(Graph G){
         this.G = G;
-        visited = new boolean[G.getV()];
+//        visited = new boolean[G.getV()];
+        visited = 0;
         pre = new int[G.getV()];
         end = -1;
 
@@ -24,7 +26,8 @@ public class HamiltonLoop {
     // 深度优先遍历的值,节点的父节点，剩余多少节点未遍历
     private boolean dfs(int v, int parent, int left){
 
-        visited[v] = true;
+//        visited[v] = true;
+        visited += (1 << v);
         pre[v] = parent;
         left--;
         if (left == 0 && G.hasEdge(v, 0)){
@@ -33,19 +36,13 @@ public class HamiltonLoop {
         }
 
         for (int w : G.adj(v))
-            if (!visited[w]) {
+//            if (!visited[w]) {
+            if ((visited & (1 << w)) == 0) {
                 if (dfs(w, v,left)) return true;
             }
-        visited[v] = false;
+//        visited[v] = false;
+        visited -= (1 << v);
         return false;
-    }
-
-    private boolean allVisited() {
-        for (int v = 0; v < G.getV(); v++){
-            if (!visited[v])
-                return false;
-        }
-        return true;
     }
 
     public ArrayList<Integer> result(){
