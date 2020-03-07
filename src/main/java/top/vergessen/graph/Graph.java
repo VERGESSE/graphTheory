@@ -8,7 +8,7 @@ import java.util.TreeSet;
 // 图实现
 // 邻接表 (TreeSet实现) 空间O(V+E) 建图时间O(E logV)
 // 查看两点是否相邻O(logV)  查找所有点临边O(V)，最差O(degree(V))
-public class Graph {
+public class Graph implements Cloneable{   // 支持深拷贝
 
     private int V; // 最大值的取值
     private int E; // 图的边数
@@ -71,9 +71,36 @@ public class Graph {
     }
 
     //求一个顶点的度
-    private int degree(int v){
+    public int degree(int v){
         validateVertex(v);
         return adj[v].size();
+    }
+
+    // 删除一个边
+    public void removeEdge(int v, int w){
+
+        validateVertex(v);
+        validateVertex(w);
+
+        adj[v].remove(w);
+        adj[w].remove(v);
+    }
+
+    @Override
+    public Object clone(){
+        try {
+            Graph cloned = (Graph)super.clone();
+            cloned.adj = new TreeSet[V];
+            for (int v = 0; v < V; v++){
+                cloned.adj[v] = new TreeSet<>();
+                for (int w : adj[v])
+                    cloned.adj[v].add(w);
+            }
+            return cloned;
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public int getV() {
