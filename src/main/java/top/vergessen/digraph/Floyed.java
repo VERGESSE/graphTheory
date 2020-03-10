@@ -1,9 +1,8 @@
-package top.vergessen.floyed;
-
-import top.vergessen.weight.WeightGraph;
+package top.vergessen.digraph;
 
 import java.util.Arrays;
 
+// 对于有向无向图最短路径求法相同
 // Floyed算法 求所有点对的最短路径 时间复杂度O(V*V*V)
 public class Floyed {
 
@@ -57,7 +56,7 @@ public class Floyed {
     }
 
     public static void main(String[] args) {
-        WeightGraph g = new WeightGraph("src/main/g8.txt");
+        WeightGraph g = new WeightGraph("src/main/wg.txt", true);
         Floyed floyed = new Floyed(g);
         if (!floyed.hasNegativeCycle){
             for (int v = 0; v < g.getV(); v++) {

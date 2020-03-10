@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.PriorityQueue;
 
 // Dijkstra算法  时间复杂度O(E logE)
-// 求解单源最短路径到底是什么
+// 求解单源最短路径到底是什么     无负权边
 public class Dijkstra3 {
 
     private WeightGraph G;
@@ -110,7 +110,7 @@ public class Dijkstra3 {
             System.out.print(dijkstra.disTo(v) + " ");
         System.out.println();
 
-        System.out.println(dijkstra.path(3));
+        System.out.println(dijkstra.path(1));
     }
 }
 

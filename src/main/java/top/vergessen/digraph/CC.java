@@ -1,6 +1,4 @@
-package top.vergessen.eulerloop;
-
-import top.vergessen.graph.Graph;
+package top.vergessen.digraph;
 
 import java.util.ArrayList;
 
